@@ -1,0 +1,11 @@
+{
+    "gitdoc.enabled": true,
+    "files.associations": {
+        "*.embeddedhtml": "html",
+        "stdbool.h": "c",
+        "iterator": "c",
+        "xmemory": "c",
+        "xutility": "c",
+        "PRIMECALAB.C": "cpp"
+    }
+}
