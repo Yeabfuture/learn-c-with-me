@@ -21,7 +21,8 @@ thicknessOfDime(x) == thicknessOfFifty(y) == thicknessOfYuan(z)
 int main() {
     int numBills = 0;
 
-    if ((scanf("%d", &numBills) == 1 && numBills > 0)) {
+    if ((scanf("%d", &numBills) == 1 && numBills > 0)) 
+    {
         float totalValue = numBills * 10;
 
         float dimeHeight = 1.8;
@@ -52,6 +53,11 @@ int main() {
             }
         }
 
+        printf("No change.\n");
+        return 0;
+    }
+    else
+    {
         printf("No change.\n");
         return 0;
     }

@@ -1,66 +1,102 @@
-/*
-Function fraction (numerator ,denominator)
-{
-return num,den
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to calculate the greatest common divisor (GCD)
+int gcd(int a, int b) {
+    if (b == 0) {
+        return a;
+    }
+    return gcd(b, a % b);
 }
 
-Input:
+// Function to simplify a fraction
+void simplify(int* numerator, int* denominator) {
+    int gcd_val = gcd(abs(*numerator), abs(*denominator));
+    *numerator /= gcd_val;
+    *denominator /= gcd_val;
+}
 
-Two positive integers representing the numerator and denominator of a fraction.
-Output:
-
-The numerator and denominator of the reduced fraction.
-*/
-
-#include <stdio.h>
-
-int factoring(int num, int den, int *numfactor, int *denfactor);
-
-int main(void)
-{
-    int numerator = 0, denominator = 0, numfactor, denfactor;
-
-    if(scanf("%d,%d", &numerator,&denominator) ==2 && numerator >=0 && denominator >=0)
-    {
-        if(denominator !=0)
-        {
-            if(numerator == 0)
-            {
-                printf("%d/%d can be reduced to 0/1.\n", numerator, denominator);
-            }
-            else
-            {
-                int gcd = factoring(numerator, denominator, &numfactor, &denfactor);
-
-                printf("%d/%d can be reduced to %d/%d.\n", numerator, denominator, numfactor, denfactor);
-            }
-        }
-        else
-        {
-            printf("Denominator cannot be zero.\n");
-        }
+// Function to add two fractions
+void add_fractions(int num1, int den1, int num2, int den2) {
+    int numerator = num1 * den2 + num2 * den1;
+    int denominator = den1 * den2;
+    simplify(&numerator, &denominator);
+    
+    if (denominator == 1) {
+        printf("%d\n", numerator); // Simplified to an integer
+    } else {
+        printf("%d/%d\n", numerator, denominator);
     }
+}
 
+// Function to subtract two fractions
+void subtract_fractions(int num1, int den1, int num2, int den2) {
+    int numerator = num1 * den2 - num2 * den1;
+    int denominator = den1 * den2;
+    simplify(&numerator, &denominator);
+
+    if (denominator == 1) {
+        printf("%d\n", numerator); // Simplified to an integer
+    } else {
+        printf("%d/%d\n", numerator, denominator);
+    }
+}
+
+// Function to multiply two fractions
+void multiply_fractions(int num1, int den1, int num2, int den2) {
+    int numerator = num1 * num2;
+    int denominator = den1 * den2;
+    simplify(&numerator, &denominator);
+    
+    if (denominator == 1) {
+        printf("%d\n", numerator); // Simplified to an integer
+    } else {
+        printf("%d/%d\n", numerator, denominator);
+    }
+}
+
+// Function to divide two fractions
+void divide_fractions(int num1, int den1, int num2, int den2) {
+    // Division of fractions is multiplication by the reciprocal
+    int numerator = num1 * den2;
+    int denominator = den1 * num2;
+    simplify(&numerator, &denominator);
+    
+    if (denominator == 1) {
+        printf("%d\n", numerator); // Simplified to an integer
+    } else {
+        printf("%d/%d\n", numerator, denominator);
+    }
+}
+
+int main() {
+    int num1, den1, num2, den2;
+    char operator;
+    
+    // Input two fractions and operator
+    scanf("%d/%d %c %d/%d", &num1, &den1, &operator, &num2, &den2);
+
+    // Perform the operation based on the operator
+    switch (operator) {
+        case '+':
+            printf("%d/%d + %d/%d = ", num1, den1, num2, den2);
+            add_fractions(num1, den1, num2, den2);
+            break;
+        case '-':
+            printf("%d/%d - %d/%d = ", num1, den1, num2, den2);
+            subtract_fractions(num1, den1, num2, den2);
+            break;
+        case '*':
+            printf("%d/%d * %d/%d = ", num1, den1, num2, den2);
+            multiply_fractions(num1, den1, num2, den2);
+            break;
+        case '/':
+            printf("%d/%d / %d/%d = ", num1, den1, num2, den2);
+            divide_fractions(num1, den1, num2, den2);
+            break;
+        default:
+            printf("Invalid operator\n");
+    }
 
     return 0;
 }
-
-int factoring(int num, int den, int *numfactor, int *denfactor)
-{
-    int result = (num < den) ? num : den;
-
-    while (result > 0)
-    {
-        if (num % result == 0 && den % result == 0)
-        {
-            break;
-        }
-        result--;
-    }
-
-    *numfactor = num / result;
-    *denfactor = den / result;
-
-    return result; 
-}
-

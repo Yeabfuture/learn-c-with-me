@@ -31,27 +31,30 @@ int days_from_start(int year, int month, int day)
     return days;  
 }  
 
-int validateInput(int year, int month, int day)
-{
-    if(year>1990)
-    {
-        if(month >0 && month <13)
-        {
-            int days_in_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-            if( day <= days_in_month[--month])
-            {
-                return 1;
-            }
-            printf("Day is wrong!\n");
-            return 0;
-        }
-
-            printf("Month is wrong!\n");
-            return 0;
-    }
+int validateInput(int year, int month, int day) {
+    if (year < 1990) {
         printf("Year is wrong!\n");
         return 0;
+    }
+
+    if (month <= 0 || month > 12) {
+        printf("Month is wrong!\n");
+        return 0;
+    }
+
+    int days_in_month[] = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    if (is_leap_year(year)) {
+        days_in_month[1] = 29;
+    }
+
+    if (day <= 0 || day > days_in_month[month - 1]) {
+        printf("Day is wrong!\n");
+        return 0;
+    }
+
+    return 1;
 }
+
   
 const char* fishing_or_basking(int days_passed)   
 {  
