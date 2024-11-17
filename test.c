@@ -83,7 +83,7 @@ int main() {
         int days_passed = days_from_start(year, month, day);
         const char* result = fishing_or_basking(days_passed);
         
-        printf("He was %s on %d.%02d.%02d\n", result, year, month, day);
+        printf("He was %s on %d.%d.%d\n", result, year, month, day);
     }
     
     return 0;

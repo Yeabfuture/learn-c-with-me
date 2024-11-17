@@ -23,7 +23,7 @@ int precedence(char mychar)
   
 int main(void)  
 {  
-    char userInput[3];  // Allow room for operator and newline character
+    char userInput[10];  // Allow room for operator and newline character
   
     if (fgets(userInput, sizeof(userInput), stdin))  
     {  
